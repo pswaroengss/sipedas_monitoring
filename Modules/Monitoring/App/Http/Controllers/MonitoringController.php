@@ -99,7 +99,7 @@ class MonitoringController extends Controller
                 'monitoring_task_status' => 'run',
                 'monitoring_task_deskripsi' => 'Monitoring SIPEDAS',
                 'monitoring_task_failure_report' => '',
-                'monitoring_task_client_target' => ':1:',
+                'monitoring_task_client_target' => ':'. $waroeng->m_w_id .':',
             ];
 
             $taskExists = DB::table('monitoring_task')
