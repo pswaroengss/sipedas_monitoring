@@ -1,0 +1,87 @@
+.monitor-hero {
+    background: linear-gradient(135deg, rgba(59, 35, 26, 0.95), rgba(123, 95, 82, 0.85));
+    color: #f3ede7;
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+}
+.monitor-hero::after {
+    content: "";
+    position: absolute;
+    inset: -40% -20% auto auto;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(242, 201, 76, 0.35), transparent 70%);
+    transform: rotate(15deg);
+}
+.monitor-card {
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 30px 60px rgba(59, 35, 26, 0.2);
+}
+.monitor-field {
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    padding: 10px 12px;
+}
+.monitor-field:focus {
+    border-color: rgba(242, 201, 76, 0.7);
+    box-shadow: 0 0 0 4px rgba(242, 201, 76, 0.2);
+}
+.btn-glow {
+    background: linear-gradient(135deg, #a16207, #d97706 60%, #f2c94c);
+    border: 0;
+    box-shadow: 0 12px 24px rgba(161, 98, 7, 0.35);
+}
+.btn-glow:hover {
+    filter: brightness(1.05);
+}
+.ghost-btn {
+    border-radius: 12px;
+    border: 1px solid rgba(161, 98, 7, 0.5);
+    color: #7c3e12;
+}
+.ghost-btn:hover {
+    background: rgba(242, 201, 76, 0.15);
+}
+.result-shell {
+    background: #fffaf6;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 24px 50px rgba(59, 35, 26, 0.1);
+}
+.status-box {
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: rgba(242, 201, 76, 0.15);
+    border: 1px solid rgba(161, 98, 7, 0.35);
+    color: #7c3e12;
+}
+.select2-container .select2-selection--single {
+    height: 42px;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    padding: 6px 10px;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 28px;
+    color: #2b1a14;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 40px;
+}
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: rgba(242, 201, 76, 0.25);
+    color: #2b1a14;
+}
+.monitor-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+.monitor-title .flame {
+    width: 22px;
+    height: 22px;
+    color: #f2c94c;
+}

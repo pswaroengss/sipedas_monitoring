@@ -1,0 +1,11 @@
+{
+    "name": "Monitoring",
+    "alias": "monitoring",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Monitoring\\App\\Providers\\MonitoringServiceProvider"
+    ],
+    "files": []
+}
