@@ -72,7 +72,7 @@
     @stack('head')
 </head>
 <body class="bg-light">
-    @php($showSidebar = session()->has('auth_user'))
+    @php($showSidebar = session()->has('auth_user') && !request()->is('login'))
     <div class="{{ $showSidebar ? 'app-shell' : '' }}">
         @if ($showSidebar)
             <aside class="sidebar">
@@ -80,6 +80,7 @@
                 <nav class="sidebar-nav">
                     <a href="/dashboard" class="sidebar-link">Dashboard</a>
                     <a href="/monitoring" class="sidebar-link">Monitoring</a>
+                    <a href="/monitoring/laporan" class="sidebar-link">Laporan</a>
                 </nav>
             </aside>
         @endif

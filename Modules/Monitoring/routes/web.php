@@ -19,10 +19,13 @@ Route::group([
     'middleware' => ['web', 'central.auth'],
 ], function () {
     Route::get('/monitoring', 'index')->name('monitoring.index');
+    Route::get('/monitoring/laporan', 'report')->name('monitoring.report');
+    Route::get('/monitoring/laporan/data', 'reportData')->name('monitoring.report.data');
     Route::post('/monitoring/process', 'process')->name('monitoring.process');
     Route::get('/monitoring/result', 'result')->name('monitoring.result');
     Route::get('/get_waroeng_penjualan', 'getWaroengPenjualan')->name('monitoring.waroeng');
     Route::get('/monitoring/kategori', 'getKategoriList')->name('monitoring.kategori');
     Route::get('/monitoring/fokus', 'getFokusByKategori')->name('monitoring.fokus');
     Route::get('/modules/monitoring/monitoring.js', 'monitoringJs')->name('monitoring.asset.js');
+    Route::get('/modules/monitoring/laporan.js', 'laporanJs')->name('monitoring.asset.report.js');
 });

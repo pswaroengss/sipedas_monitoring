@@ -23,6 +23,18 @@ class MonitoringController extends Controller
         ]);
     }
 
+    public function report()
+    {
+        $areas = DB::table('m_area')
+            ->select('m_area_id', 'm_area_nama')
+            ->orderBy('m_area_id')
+            ->get();
+
+        return view('monitoring::report', [
+            'areas' => $areas,
+        ]);
+    }
+
     public function process(Request $request)
     {
         // return $request->all();
@@ -203,6 +215,55 @@ class MonitoringController extends Controller
         ]);
     }
 
+    public function reportData(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'tanggal' => ['nullable', 'date'],
+            'area' => ['nullable', 'string'],
+            'waroeng' => ['nullable', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'ok' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $query = DB::table('rekap_monitoring_sistem')
+            ->leftJoin('users', 'users_id', '=', 'r_m_s_created_by');
+
+        if ($request->filled('tanggal')) {
+            $query->whereDate('r_m_s_tanggal', $request->input('tanggal'));
+        }
+
+        if ($request->filled('area') && $request->input('area') !== 'all') {
+            $query->where('r_m_s_m_area_id', $request->input('area'));
+        }
+
+        if ($request->filled('waroeng') && $request->input('waroeng') !== 'all') {
+            $query->where('r_m_s_m_w_id', $request->input('waroeng'));
+        }
+
+        $data = $query->select([
+            'r_m_s_kategori',
+            'r_m_s_m_area_nama',
+            'r_m_s_m_w_nama',
+            'r_m_s_tanggal',
+            'r_m_s_table_sumber',
+            'r_m_s_table_tujuan',
+            'r_m_s_status',
+            'r_m_s_kode_temuan',
+            DB::raw('COALESCE(name, email, CAST(r_m_s_created_by AS TEXT)) AS created_by_name'),
+        ])->orderByDesc('r_m_s_tanggal')->get();
+
+        return response()->json([
+            'ok' => true,
+            'data' => $data,
+        ]);
+    }
+
     public function getWaroengPenjualan(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -332,6 +393,14 @@ class MonitoringController extends Controller
     public function monitoringJs()
     {
         $path = base_path('Modules/Monitoring/Resources/assets/js/monitoring.js');
+        return response()->file($path, [
+            'Content-Type' => 'application/javascript',
+        ]);
+    }
+
+    public function laporanJs()
+    {
+        $path = base_path('Modules/Monitoring/Resources/assets/js/laporan.js');
         return response()->file($path, [
             'Content-Type' => 'application/javascript',
         ]);
