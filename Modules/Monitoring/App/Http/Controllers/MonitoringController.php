@@ -198,7 +198,7 @@ class MonitoringController extends Controller
                 'monitoring_task_end_date',
                 'monitoring_task_status',
                 'monitoring_task_failure_report',
-                DB::raw('COALESCE(name ,email, CAST(monitoring_task_created_by AS TEXT)) AS monitoring_task_created_by_name'),
+                DB::raw('COALESCE(name ,email, CAST(monitoring_task_created_by AS TEXT)) AS monitoring_task_created_by_name')
             ])
             ->orderByDesc('monitoring_task_created_at')
             ->forPage($page, $perPage)
@@ -246,7 +246,7 @@ class MonitoringController extends Controller
             $query->where('r_m_s_m_w_id', $request->input('waroeng'));
         }
 
-        $data = $query->select([
+       $data = $query->select([
             'r_m_s_kategori',
             'r_m_s_m_area_nama',
             'r_m_s_m_w_nama',
@@ -255,8 +255,31 @@ class MonitoringController extends Controller
             'r_m_s_table_tujuan',
             'r_m_s_status',
             'r_m_s_kode_temuan',
-            DB::raw('COALESCE(name, email, CAST(r_m_s_created_by AS TEXT)) AS created_by_name'),
-        ])->orderByDesc('r_m_s_tanggal')->get();
+            'r_m_s_created_at',
+            'r_m_s_found_sumber_id',
+            DB::raw("
+                SUM(
+                    COALESCE(NULLIF(r_m_s_nilai_seharusnya, '')::numeric, 0)
+                    -
+                    COALESCE(NULLIF(r_m_s_nilai_real, '')::numeric, 0)
+                ) as selisih
+            ")
+        ])
+        ->groupBy([
+            'r_m_s_kategori',
+            'r_m_s_m_area_nama',
+            'r_m_s_m_w_nama',
+            'r_m_s_tanggal',
+            'r_m_s_table_sumber',
+            'r_m_s_table_tujuan',
+            'r_m_s_status',
+            'r_m_s_kode_temuan',
+            'r_m_s_created_at',
+            'r_m_s_found_sumber_id'
+        ])
+        ->orderByDesc('r_m_s_tanggal')
+        ->get();
+
 
         return response()->json([
             'ok' => true,

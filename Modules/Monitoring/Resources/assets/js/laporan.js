@@ -69,8 +69,10 @@ $(function () {
                 { data: 'r_m_s_table_sumber', defaultContent: '' },
                 { data: 'r_m_s_table_tujuan', defaultContent: '' },
                 { data: 'r_m_s_status', defaultContent: '' },
-                { data: 'r_m_s_kode_temuan', defaultContent: '' },
-                { data: 'created_by_name', defaultContent: '' }
+                { data: 'r_m_s_found_sumber_id', defaultContent: '' },
+                { data: 'r_m_s_kode_temuan', defaultContent: '', className: 'wrap-col' },
+                { data: 'selisih', defaultContent: '' },
+                { data: 'r_m_s_created_at', defaultContent: '' },
             ],
             order: [],
             pageLength: 20

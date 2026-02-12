@@ -85,3 +85,10 @@
     height: 22px;
     color: #f2c94c;
 }
+#reportTable th.wrap-col,
+#reportTable td.wrap-col {
+    width: 140px;
+    max-width: 140px;
+    white-space: normal !important;
+    word-break: break-word;
+}

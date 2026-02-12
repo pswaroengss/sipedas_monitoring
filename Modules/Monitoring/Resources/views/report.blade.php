@@ -60,8 +60,10 @@
                     <th class="text-center">Table Sumber</th>
                     <th class="text-center">Table Tujuan</th>
                     <th class="text-center">Status</th>
-                    <th class="text-center">Kode Temuan</th>
-                    <th class="text-center">Created By</th>
+                    <th class="text-center">Kode</th>
+                    <th class="text-center wrap-col">Temuan</th>
+                    <th class="text-center">Selisih</th>
+                    <th class="text-center">Time</th>
                 </tr>
             </thead>
             <tbody></tbody>
